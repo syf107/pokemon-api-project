@@ -23,10 +23,10 @@
         </section>
 
         <section class="pokemon-log">
-          <h2 class="pokemon-log--title">Pokemon Logbook</h2>
+          <h2 class="pokemon-log--title subsection-title">Pokemon Logbook</h2>
           <div class="pokemon-log--search">
             <span>Search your pokemon here: </span>
-            <input class="search-box" type="text" placeholder="Kyogre" />
+            <input class="search-box" type="text" placeholder="Kyogre / 257" />
             <button class="search-button">Submit</button>
           </div>
           <ul class="pokemon-log--group"></ul>
@@ -34,7 +34,93 @@
       </div>
 
       <section class="pokemon-details">
-        <h2>Pokemon Details</h2>
+        <h2 class="pokemon-details__title subsection-title">Pokemon Details</h2>
+        <!-- IN THIS SECTION, IT WILL CREATE ANOTHER SECTION THAT GENERATE, ID, PICTURE, NAME, TYPE, CHARACTERISTICS, STATUS, MOVES,  -->
+        <article class="pokemon-details__data">
+          <div class="pokemon-details__screen">
+            <!-- POKEMON ID -->
+            <div class="pokemon-details__id">
+              <p class="details-id__name">Pokemon ID:</p>
+              <p class="details-id__value">???</p>
+            </div>
+
+            <!-- POKEMON PICTURE -->
+            <div class="pokemon-details__picture">
+              <!-- FRONT -->
+              <section class="front-picture">
+                <div class="front-picture__image"><img class="front-image-poke" src="" alt=""></div>
+                <p class="front-picture__text">FRONT</p>
+              </section>
+
+              <!-- BACK -->
+              <section class="back-picture">
+                <div class="back-picture__image"><img class="back-image-poke" src="" alt=""></div>
+                <p class="back-picture__text">BACK</p>
+              </section>
+            </div>
+
+            <!-- POKEMON NAME -->
+            <div class=" layout-data-list pokemon-details__name">
+              <p class="details-name__name">Name:</p>
+              <p class=" details-name__value">???</p>
+            </div>
+
+            <!-- POKEMON TYPE -->
+            <div class="layout-data-list pokemon-details__types">
+              <p class="details-types__name">Type:</p>
+              <p class=" details-types__value">???</p>
+            </div>
+
+            <!-- POKEMON STATUS -->
+            <div class=" layout-data-list pokemon-details__status">
+              <p class="details-status__name">Status:</p>
+              <ul class="details-status__value">
+                <li class="status-list">
+                  <p class="status-list__name">hp </p>
+                  <span class="hp status-list__value"> ???</span>
+                </li>
+                <li class="status-list">
+                  <p class="status-list__name">attack</p>
+                  <span class="attack status-list__value"> ???</span>
+                </li>
+                <li class="status-list">
+                  <p class="status-list__name">defense</p>
+                  <span class="defense status-list__value"> ???</span>
+                </li>
+                <li class="status-list">
+                  <p class="status-list__name">sp. atk</p>
+                  <span class="spatk status-list__value"> ???</span>
+                </li>
+                <li class="status-list">
+                  <p class="status-list__name">sp. def</p>
+                  <span class="spdef status-list__value"> ???</span>
+                </li>
+                <li class="status-list">
+                  <p class="status-list__name">speed</p>
+                  <span class="speed status-list__value"> ???</span>
+                </li>
+              </ul>
+            </div>
+            <div class=" layout-data-list pokemon-details__ability">
+              <p class="details-ability__name">Ability:</p>
+              <ul class="details-ability__value">
+                <li class="ability-list">???</li>
+                <li class="ability-list">???</li>
+                <li class="ability-list">???</li>
+              </ul>
+            </div>
+             <div class="layout-data-list pokemon-details__move">
+              <p class="details-move__name">Move:</p>
+              <ul class="details-move__value">
+                <li class="move-list">???</li>
+                <li class="move-list">???</li>
+                <li class="move-list">???</li>
+              </ul>
+            </div>
+          </div>
+         
+          </div>
+        </article>
       </section>
     </main>
     <script src="js/main.js"></script>
