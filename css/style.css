@@ -120,9 +120,28 @@ body {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 2rem 3rem;
-  border: 2px solid black;
+  border: 4px outset #999;
   border-radius: 0.8rem;
   background: #f15050;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 52rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.pokemon-log--group::-webkit-scrollbar {
+  width: 1rem;
+}
+
+.pokemon-log--group::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f15050;
+}
+
+.pokemon-log--group::-webkit-scrollbar-thumb {
+  background-color: #e42f2f;
 }
 
 .pokemon-list {
@@ -170,10 +189,13 @@ body {
 
 .pokemon-details__data {
   background-color: #ffcb05;
-  border: 2px solid black;
+  border: 4px outset #999;
   border-radius: 0.8rem;
   height: auto;
   padding: 2rem 2.5rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
 .pokemon-details__screen {
@@ -344,7 +366,6 @@ body {
 
 .details-move__value::-webkit-scrollbar {
   width: 1rem;
-  color: black;
 }
 
 .details-move__value::-webkit-scrollbar-track {
@@ -360,4 +381,58 @@ body {
   border-bottom: 3px ridge #999;
   /* margin: 0; */
   padding-bottom: 1rem;
+}
+
+.explanation {
+  background-color: #f8db65;
+  padding: 3rem 2rem 1.5rem 2rem;
+  width: 40%;
+  position: fixed;
+  z-index: 100;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.6rem;
+  border: 3px outset #999;
+  border-radius: 0.8rem;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.explanation__ability-name {
+  font-size: 1.8rem;
+  padding-bottom: 0.8rem;
+  display: inline-block;
+  border-bottom: 2px ridge black;
+  margin-bottom: 0.8rem;
+  text-transform: capitalize;
+}
+
+.explanation__ability-description {
+  font-size: 1.2rem;
+  line-height: 2;
+  padding-bottom: 2rem;
+  margin-bottom: 3rem;
+  /* border-bottom: 2px solid black; */
+  color: #303030;
+}
+
+.explanation__ability-pokemon {
+  font-size: 1.2rem;
+  color: #252525;
+  margin-bottom: 0.8rem;
+}
+
+.explanation__ability-pokemon-list {
+  font-size: 1.2rem;
+  color: #252525;
+  margin-bottom: 0.8rem;
+}
+
+.explanation__icon {
+  position: absolute;
+  font-size: 30px;
+  right: 0.5rem;
+  top: 0.5rem;
 }

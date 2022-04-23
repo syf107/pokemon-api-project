@@ -21,18 +21,25 @@ const specialDefenseValue = document.querySelector('.spdef');
 const speedValue = document.querySelector('.speed');
 const abilityValue = document.querySelector('.details-ability__value');
 const moveValue = document.querySelector('.details-move__value');
+let pokemonContainer = [];
+let abilitiesContainer = [];
+let movesContainer;
+
 // function to get pokemon inside pokemon log.
 async function getPokemonList() {
   const url = 'https://pokeapi.co/api/v2/pokemon/';
+  let indexPokemon = 151;
 
-  let response = await fetch(url);
-  let user = await response.json();
-  let listOfPokemon = user.results;
-  let lengthOfList = listOfPokemon.length - 1;
+  for (let i = 1; i <= indexPokemon; i++) {
+    let response = await fetch(url + i);
+    let user = await response.json();
+    pokemonContainer.push(user);
+  }
 
-  listOfPokemon.forEach((pokemon, index) => {
-    // console.log(index, lengthOfList);
-    generateNewPokemonList(pokemon.url, index, lengthOfList);
+  Promise.all(pokemonContainer).then((results) => {
+    results.forEach((result, index) => {
+      generateNewPokemonList(result, index, indexPokemon);
+    });
   });
 }
 
@@ -40,87 +47,61 @@ getPokemonList();
 
 // run the pokemon list
 
-async function generateNewPokemonList(data, index, length) {
-  // fetching each pokemon.
-  let response = await fetch(data);
-  let user = await response.json();
-  // console.log(user);
+async function generateNewPokemonList(user, index = 0, indexPokemon = 1) {
+  // generate element needed to create pokemon list and its data
+  const newPokemonList = document.createElement('li');
+  const newPokemonNumber = document.createElement('p');
+  const newPokemonImage = document.createElement('img');
+  const newPokemonName = document.createElement('p');
 
-  function generateNewElement(user) {
-    // generate element needed to create pokemon list and its data
-    const newPokemonList = document.createElement('li');
-    const newPokemonNumber = document.createElement('p');
-    const newPokemonImage = document.createElement('img');
-    const newPokemonName = document.createElement('p');
+  // add class and its data from API
+  newPokemonList.className = 'pokemon-list';
 
-    // add class and its data from API
-    newPokemonList.className = 'pokemon-list';
+  newPokemonImage.src = user.sprites.front_default;
+  newPokemonImage.className = 'pokemon-list--image';
 
-    newPokemonImage.src = user.sprites.front_default;
-    newPokemonImage.className = 'pokemon-list--image';
+  const text = document.createTextNode(user.name);
+  newPokemonName.appendChild(text);
 
-    const text = document.createTextNode(user.name);
-    newPokemonName.appendChild(text);
+  const number = document.createTextNode(user.id);
+  newPokemonNumber.className = 'pokemon-list--number';
+  newPokemonNumber.appendChild(number);
+  newPokemonName.className = 'pokemon-list--name';
 
-    const number = document.createTextNode(user.id);
-    newPokemonNumber.className = 'pokemon-list--number';
-    newPokemonNumber.appendChild(number);
-    newPokemonName.className = 'pokemon-list--name';
-
-    // wait 3 seconds
-    new Promise((resolve, reject) => setTimeout(resolve, 1500));
-
-    // insert each element to the log and list.
-    pokemonLogGroupEl.appendChild(newPokemonList);
-    newPokemonList.appendChild(newPokemonImage);
-    newPokemonList.appendChild(newPokemonName);
-    newPokemonList.appendChild(newPokemonNumber);
-  }
-
-  generateNewElement(user);
+  // insert each element to the log and list.
+  pokemonLogGroupEl.appendChild(newPokemonList);
+  newPokemonList.appendChild(newPokemonImage);
+  newPokemonList.appendChild(newPokemonName);
+  newPokemonList.appendChild(newPokemonNumber);
 
   const pokemonListElemAll = document.querySelectorAll('.pokemon-list');
-  // console.log(pokemonListElemAll.length);
 
-  if (index === length) {
-    if (pokemonListElemAll.length > 1 && pokemonListElemAll.length < 20) {
+  // if the number of index similar with the total of pokemon
+  // console.log(index, indexPokemon);
+  if (index + 1 === indexPokemon) {
+    // if amount of element list is bigger than one but lesser than the full index.
+    if (
+      pokemonListElemAll.length > 1 &&
+      pokemonListElemAll.length < indexPokemon
+    ) {
+      // do again the iteration.
       getPokemonList();
     } else {
-      pokemonListElemAll.forEach((pokemon) => {
+      // if everything is good, go fetch data based on the name.
+      pokemonListElemAll.forEach((pokemon, index) => {
         pokemon.addEventListener('click', function () {
-          const pokemonName = pokemon.childNodes[1].innerHTML;
-          // console.log(pokemonName);
-          generatePokemonDetails(pokemonName);
+          console.log(pokemonContainer[index]);
+          generatePokemonDetails(pokemonContainer[index]);
         });
       });
     }
   }
 }
 
-// function to search the pokemon.
-
-const searchBoxEl = document.querySelector('.search-box');
-const searchButtonEl = document.querySelector('.search-button');
-
-searchButtonEl.addEventListener('click', getPokemonSearch);
-
-function getPokemonSearch() {
-  pokemonLogGroupEl.innerHTML = '';
-
-  const pokemonName = searchBoxEl.value;
-  const url = 'https://pokeapi.co/api/v2/pokemon/' + pokemonName.toLowerCase();
-
-  if (pokemonName === '') {
-    getPokemonList();
-  } else {
-    generateNewPokemonList(url);
-  }
-}
-
-async function generatePokemonDetails(pokemon) {
+async function generatePokemonDetails(user) {
   // fetching each pokemon.
-  let response = await fetch('https://pokeapi.co/api/v2/pokemon/' + pokemon);
-  let user = await response.json();
+  // let response = await fetch('https://pokeapi.co/api/v2/pokemon/' + pokemon);
+  // let user = await response.json();
 
   // adding ID
   idValue.textContent = user.id;
@@ -145,7 +126,7 @@ async function generatePokemonDetails(pokemon) {
   user.types.forEach((type) => arrayType.push(type.type.name));
   typeValue.textContent = arrayType.join(', ');
 
-  // adding status
+  // adding status value
   const statusValue = [
     hpValue,
     attackValue,
@@ -168,7 +149,9 @@ async function generatePokemonDetails(pokemon) {
       newList.className = `${nameList}-list`;
       newList.textContent = list[nameList].name;
       containerList.appendChild(newList);
-      if (index > 7) {
+
+      //condition to create a scroll for so many moves.
+      if (index > 4) {
         newList.parentElement.style.overflowY = 'scroll';
         newList.parentElement.style.height = '12rem';
       } else {
@@ -179,4 +162,32 @@ async function generatePokemonDetails(pokemon) {
   };
   addingListOfAbilityMove(abilityValue, 'abilities', 'ability');
   addingListOfAbilityMove(moveValue, 'moves', 'move');
+}
+
+// function to search the pokemon.
+
+const searchBoxEl = document.querySelector('.search-box');
+const searchButtonEl = document.querySelector('.search-button');
+
+searchButtonEl.addEventListener('click', getPokemonSearch);
+
+function getPokemonSearch() {
+  pokemonLogGroupEl.innerHTML = '';
+  pokemonContainer = [];
+
+  const pokemonName = searchBoxEl.value;
+  const url = 'https://pokeapi.co/api/v2/pokemon/' + pokemonName.toLowerCase();
+
+  if (pokemonName === '') {
+    getPokemonList();
+  } else {
+    fetch(url)
+      .then((res) => res.json())
+      .then((result) => {
+        pokemonContainer.push(result);
+        console.log(result);
+        generateNewPokemonList(pokemonContainer[0]);
+      });
+  }
+  // console.log(promises[0]);
 }
