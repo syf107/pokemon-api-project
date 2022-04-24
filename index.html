@@ -8,14 +8,53 @@
     <title>Pokemon API Projects</title>
   </head>
   <body>
-    <div class="explanation">
-      <h6 class="explanation__ability-name">pokemon name</h6>
-      <p class="explanation__ability-description">
-        This kind of font is really hard to read.
-      </p>
-      <h6 class="explanation__ability-pokemon">Pokemon with similar move:</h6>
-      <p class="explanation__ability-pokemon-list">I don't know</p>
-      <ion-icon class="explanation__icon" name="close-outline"></ion-icon>
+    <div class="hidden blur-screen"></div>
+
+    <div class="hidden explanation">
+      <section class="hidden explanation__ability">
+        <h6 class="explanation__ability-name">Ability name</h6>
+        <h6 class="explanation__move-desc-name">Description:</h6>
+
+        <p class="explanation__ability-description">
+          This kind of font is really hard to read.
+        </p>
+        <h6 class="explanation__ability-pokemon">Pokemon with this move:</h6>
+        <p class="explanation__ability-pokemon-list">I don't know</p>
+      </section>
+      <section class="hidden explanation__move">
+        <h6 class="explanation__move-name">Move name</h6>
+        <p class="explanation__move-damage-class">???</p>
+        <div class="explanation__move-row">
+          <div class="move-row-list">
+            <h6 class="explanation-list explanation__move-type-name">type</h6>
+            <p class="explanation__move-type-value">???</p>
+          </div>
+          <div class="move-row-list">
+            <h6 class="explanation-list explanation__move-pp-name">
+              power points
+            </h6>
+            <p class="explanation__move-pp-value">???</p>
+          </div>
+        </div>
+        <div class="explanation__move-row">
+          <div class="move-row-list">
+            <h6 class="explanation-list explanation__move-power-name">Power</h6>
+            <p class="explanation__move-power-value">???</p>
+          </div>
+          <div class="move-row-list">
+            <h6 class="explanation-list explanation__move-accu-name">
+              Accuracy
+            </h6>
+            <p class="explanation__move-accu-value">???</p>
+          </div>
+        </div>
+        <h6 class="explanation__move-desc-name">Description:</h6>
+        <p class="explanation__move-desc-value">???</p>
+        <h6 class="explanation__move-pokemon">Pokemon with this move:</h6>
+        <p class="explanation__move-pokemon-list">I don't know</p>
+      </section>
+
+      <ion-icon class="explanation__esc" name="close-outline"></ion-icon>
     </div>
 
     <main class="pokemon-list-details container">
@@ -139,6 +178,7 @@
         </article>
       </section>
     </main>
+
     <script
       type="module"
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"

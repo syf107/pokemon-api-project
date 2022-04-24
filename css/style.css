@@ -18,15 +18,17 @@ html {
 }
 
 body {
-  background: rgb(255, 203, 5);
+  /* background: rgb(255, 203, 5);
   background: radial-gradient(
     circle,
     rgba(255, 203, 5, 1) 0%,
     rgba(151, 161, 94, 1) 27%,
     rgba(43, 117, 187, 1) 81%
-  );
+  ); */
+  background-color: rgb(163, 163, 163);
   /* background-repeat: no-repeat; */
   background-size: contain;
+  width: 100%;
   height: 100%;
 }
 
@@ -188,7 +190,7 @@ body {
 }
 
 .pokemon-details__data {
-  background-color: #ffcb05;
+  background-color: #f8db65;
   border: 4px outset #999;
   border-radius: 0.8rem;
   height: auto;
@@ -341,6 +343,7 @@ body {
 
 .ability-list {
   text-align: left;
+  cursor: pointer;
 }
 
 .pokemon-details__move {
@@ -362,6 +365,7 @@ body {
 
 .move-list {
   text-align: left;
+  cursor: pointer;
 }
 
 .details-move__value::-webkit-scrollbar {
@@ -383,10 +387,13 @@ body {
   padding-bottom: 1rem;
 }
 
+/* explanation box */
 .explanation {
   background-color: #f8db65;
   padding: 3rem 2rem 1.5rem 2rem;
   width: 40%;
+  height: 70vh;
+  overflow: auto;
   position: fixed;
   z-index: 100;
   top: 50%;
@@ -400,7 +407,8 @@ body {
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
-.explanation__ability-name {
+.explanation__ability-name,
+.explanation__move-name {
   font-size: 1.8rem;
   padding-bottom: 0.8rem;
   display: inline-block;
@@ -409,7 +417,8 @@ body {
   text-transform: capitalize;
 }
 
-.explanation__ability-description {
+.explanation__ability-description,
+.explanation__move-desc-value {
   font-size: 1.2rem;
   line-height: 2;
   padding-bottom: 2rem;
@@ -418,21 +427,88 @@ body {
   color: #303030;
 }
 
-.explanation__ability-pokemon {
-  font-size: 1.2rem;
-  color: #252525;
+.explanation__ability-pokemon,
+.explanation__move-pokemon {
+  font-size: 1.4rem;
+  color: #000;
   margin-bottom: 0.8rem;
 }
 
-.explanation__ability-pokemon-list {
+.explanation__ability-pokemon-list,
+.explanation__move-pokemon-list {
   font-size: 1.2rem;
   color: #252525;
   margin-bottom: 0.8rem;
+  text-transform: capitalize;
+  line-height: 2;
 }
 
-.explanation__icon {
+/* explanation move */
+.explanation__move-damage-class {
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  margin-left: -1rem;
+}
+
+.explanation__move-row {
+  display: flex;
+  flex-direction: row;
+  gap: 5rem;
+  justify-content: space-between;
+  border-bottom: 2px ridge #000;
+  padding: 0.8rem;
+  margin-bottom: 1.2rem;
+}
+
+.move-row-list {
+  display: flex;
+  width: 30rem;
+  align-items: center;
+}
+
+.explanation__move-type-value {
+  font-size: 1rem;
+}
+
+.explanation-list {
+  width: 11rem;
+  position: relative;
+}
+
+.explanation-list::after {
+  position: absolute;
+  content: ':';
+  right: 0;
+}
+
+.explanation__move-desc-name {
+  margin: 2rem 0 1.2rem 0;
+  font-size: 1.4rem;
+}
+
+.explanation__esc {
   position: absolute;
   font-size: 30px;
   right: 0.5rem;
   top: 0.5rem;
+}
+
+.hidden {
+  display: none;
+}
+
+/* .appear {
+  display: block;
+} */
+
+.blur-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.459);
+  backdrop-filter: blur(2px);
+  z-index: 50;
+  width: 100%;
+  height: 100%;
 }
